@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.Random;
+
 public class ServiceArrays {
 	
 	  //Arreglo
@@ -17,7 +19,8 @@ public class ServiceArrays {
      */
 
     public ServiceArrays() {
-        //TODO Instanciar el arreglo de un tamaño de 10 elemetos
+        // Instanciar el arreglo de un tamaño de 10 elemetos
+    	int[] numbers=new int [10];
     }
 
     /**
@@ -40,14 +43,21 @@ public class ServiceArrays {
      * @param end:
      */
     public void loadElements(int begin, int end ){
+    	for(int i=0;i<numbers.length;i++) {
+    		 numbers[i] = new Random().nextInt(end - begin + 1 ) + begin;
+    	}
 
     }
 
     public void addElement( int element){
+    	
 
     }
 
-    private int[] sureCapacity(){
+    private int[] sureCapacity(int valor){
+    	 for(int i=0;i<numbers.length+1;i++)	{
+    		 
+    	 }
 
         return null;
     }
