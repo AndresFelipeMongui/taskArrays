@@ -2,13 +2,20 @@ package logic;
 
 public class ServiceArrays {
 	
-	private int[] numbers;
-	private int position;
-	 public static final int BURBBLE = 0;
+	  //Arreglo
+    private int[] numbers;
+    //variable que controla la posición del siguiente elemento
+    private int position;
+
+    public static final int BURBBLE = 0;
+
     int SELECTION=1;
     int INSERTION=2;
     int SHELL=3;
-    
+    /**
+     * Constructor vació
+     */
+
     public ServiceArrays() {
         //TODO Instanciar el arreglo de un tamaño de 10 elemetos
     }
@@ -174,3 +181,4 @@ public class ServiceArrays {
     	return null;
     }
 }
+
