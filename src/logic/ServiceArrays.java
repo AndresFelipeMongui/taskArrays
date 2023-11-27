@@ -1,5 +1,6 @@
 package logic;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class ServiceArrays {
@@ -11,29 +12,38 @@ public class ServiceArrays {
 
     public static final int BURBBLE = 0;
 
-    int SELECTION=1;
-    int INSERTION=2;
-    int SHELL=3;
+    public static final int SELECTION=1;
+    public static final int INSERTION=2;
+    public static final int SHELL=3;
+    
+    private static final int size_Default=10;
+    
     /**
      * Constructor vació
      */
 
-    public ServiceArrays() {
+    public ServiceArrays(int begin, int end) {
         // Instanciar el arreglo de un tamaño de 10 elemetos
-    	int[] numbers=new int [10];
+    	 numbers=new int [size_Default];
+    	 loadElements(begin,end);
+    	 position=size_Default;
     }
 
     /**
      * Constructor que inicializa el arreglo
      * @param size tamaño del arreglo
      */
-    public ServiceArrays(int size) {
-        //TODO Instanciar el arreglo de un tamaño del parámetro
-        this.position = position;
+    public ServiceArrays(int size,int begin,int end) {
+    	//TODO Instanciar el arreglo de un tamaño del parámetro
+        numbers=new int[size];
+        loadElements(begin,end);
+        position=size;
+        //limite superior menos limite inferior +1
     }
 
     public ServiceArrays(int[] numbers) {
         this.numbers = numbers;
+        position=numbers.length;
     }
     
 
@@ -43,27 +53,47 @@ public class ServiceArrays {
      * @param end:
      */
     public void loadElements(int begin, int end ){
-    	for(int i=0;i<numbers.length;i++) {
-    		 numbers[i] = new Random().nextInt(end - begin + 1 ) + begin;
+    	int minimo=begin<=end ? begin:end;
+    	int maximo=begin >= end ?begin:end;
+    	
+    	for(int index=0;index<numbers.length;index++) {
+    		 numbers[index] = new Random().nextInt(maximo - minimo + 1 ) + minimo;
     	}
+
 
     }
 
     public void addElement( int element){
     	
-
+    	if(position >=numbers.length) {
+    		numbers=sureCapacity();
+    	}
+    	numbers[position]=element;
+		position++;
     }
 
-    private int[] sureCapacity(int valor){
-    	 for(int i=0;i<numbers.length+1;i++)	{
-    		 
-    	 }
+    private int[] sureCapacity(){
+    	 int newSize=numbers.length + numbers.length/2;
+    	 int[] newArray=Arrays.copyOf(numbers, newSize);
+    	
 
-        return null;
+        return newArray;
     }
     public String showNumber(int[]numbers)	{
+    	StringBuilder string=new StringBuilder();
+    	string.append("[ ");
+    	for (int i=0;i<numbers.length;i++)	{
+    		
+    		string.append(numbers[i]);
+    		if (i !=position -1)	{
+    			string.append(", ");
+    		}
+    		
+    		
+    	}
+    	string.append("]");
     	
-    	return null;
+    	return string.toString();
     }
     /*
      * permite dar la posicion de un elemento ingresado y en caso de no estar el elemento imprime -1
@@ -73,7 +103,7 @@ public class ServiceArrays {
     	for(int i=0;i<numbers.length;i++)	{
     		
     		if(value==numbers[i])	{
-    			System.out.println("el numero ingresado se encuentra en la posicion: "+i );
+    			System.out.println("el numero ingresado se encuentra en la posicion: "+ i );
     			encontrado=true;
     			break;
     		}
@@ -84,7 +114,7 @@ public class ServiceArrays {
     	}
     	return 0;
     }
-    public int sortNumbers(int s) {
+    public int sortNumbers() {
     	
     	return 0;
     }
@@ -150,7 +180,7 @@ public class ServiceArrays {
     	
     }
     
-    private int getAverage(int[] numbers)	{
+    public double getAverage(int[] numbers)	{
     	
     	int cont=0;
     	int sum=0;
@@ -158,7 +188,7 @@ public class ServiceArrays {
     		cont++;
     		sum +=numbers[i];
     	}
-    	int average=sum/cont;
+    	double average=sum/cont;
    
 		return average;
     	
@@ -190,5 +220,10 @@ public class ServiceArrays {
     	}
     	return null;
     }
+    
+    public int[] getNumbers() {
+		// TODO Auto-generated method stub
+		return numbers.clone();
+	}
 }
 
